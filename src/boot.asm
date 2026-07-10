@@ -10,7 +10,16 @@ multiboot_start:
     dd multiboot_end - multiboot_start                       ; header len
     dd -(0xe85250d6 + 0 + (multiboot_end - multiboot_start)) ; checksum
 
+    align 8
+    dw 5       ; framebuffer tag
+    dw 0       ; 1=optional, 0=force
+    dd 20      ; 20 bytes
+    dd 320    ; width
+    dd 200     ; height
+    dd 32      ; depth (bits per pixel)
+
     ; end tag
+    align 8
     dw 0
     dw 0
     dd 8
@@ -23,6 +32,7 @@ extern kernel_main
 start:
     ; make a minimal stack so we can handoff to C (i think that's how it goes?)
     mov esp, sttop
+    push ebx
     call kernel_main
 
 .halt:

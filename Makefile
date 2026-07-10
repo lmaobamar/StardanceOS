@@ -1,7 +1,7 @@
 CC = clang
 LD = ld.lld
 AS = nasm
-CFLAGS = -target i386-elf -Wall -Wextra -O2 -std=c11 -ffreestanding -Iinclude -MMD -MP
+CFLAGS = -target i386-elf -Wall -Wextra -O2 -std=c11 -ffreestanding -I include -MMD -MP -mno-sse -mno-mmx -mno-sse2 -mno-3dnow
 LDFLAGS = -m elf_i386 -T linker.ld -nostdlib
 SRCS = $(shell find src -name '*.c')
 ASM_SRCS = $(shell find src -name '*.asm')

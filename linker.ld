@@ -4,11 +4,11 @@ SECTIONS {
     . = 1M;
 
     .text : {
-        *(.multiboot_header)
+        KEEP(*(.multiboot_header))
         *(.text)
     }
 
-    .rodata : { *.(.rodata) }
-    .data : { *.(.data) }
-    .bss : { *.(.bss) }
+    .rodata : { *(.rodata) }
+    .data   : { *(.data) }
+    .bss    : { *(.bss) }
 }
